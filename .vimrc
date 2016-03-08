@@ -48,7 +48,8 @@ set laststatus=2
 
 " code folding
 " set foldmethod=indent
-set foldmethod=syntax
+"set foldmethod=syntax
+set foldmethod=indent
 " auto start code folding
 set nofoldenable
 

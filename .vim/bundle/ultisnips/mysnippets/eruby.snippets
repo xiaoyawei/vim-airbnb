@@ -98,13 +98,13 @@ endsnippet
 snippet ffe "form_for with errors" w
 `!p textmate_var('TM_RAILS_TEMPLATE_START_RUBY_EXPR', snip)`error_messages_for :${1:model}`!p textmate_var('TM_RAILS_TEMPLATE_END_RUBY_EXPR', snip)`
 
-`!p textmate_var('TM_RAILS_TEMPLATE_START_RUBY_EXPR', snip)`form_for @${2:$1} do |f|`!p textmate_var('TM_RAILS_TEMPLATE_END_RUBY_EXPR', snip)`
+`!p textmate_var('TM_RAILS_TEMPLATE_START_RUBY_EXPR', snip)`form_for ${2:$1} do |f|`!p textmate_var('TM_RAILS_TEMPLATE_END_RUBY_EXPR', snip)`
 	$0
 `!p textmate_var('TM_RAILS_TEMPLATE_END_RUBY_BLOCK', snip)`
 endsnippet
 
 snippet ff "form_for" w
-`!p textmate_var('TM_RAILS_TEMPLATE_START_RUBY_EXPR', snip)`form_for @${1:model} do |f|`!p textmate_var('TM_RAILS_TEMPLATE_END_RUBY_EXPR', snip)`
+`!p textmate_var('TM_RAILS_TEMPLATE_START_RUBY_EXPR', snip)`form_for ${1:model} do |f|`!p textmate_var('TM_RAILS_TEMPLATE_END_RUBY_EXPR', snip)`
 	$0
 `!p textmate_var('TM_RAILS_TEMPLATE_END_RUBY_BLOCK', snip)`
 endsnippet
@@ -221,7 +221,7 @@ snippet slt "stylesheet_link_tag" w
 `!p textmate_var('TM_RAILS_TEMPLATE_START_RUBY_EXPR', snip)`stylesheet_link_tag ${1::all}${2:, :cache => ${3:true}}`!p textmate_var('TM_RAILS_TEMPLATE_END_RUBY_EXPR', snip)`
 endsnippet
 
-snippet st "submit_tag" w
+snippet sbt "submit_tag" w
 `!p textmate_var('TM_RAILS_TEMPLATE_START_RUBY_EXPR', snip)`submit_tag "${1:Save changes}"${2:, :id => "${3:submit}"}${4:, :name => "${5:$3}"}${6:, :class => "${7:form_$3}"}${8:, :disabled => ${9:false}}${10:, :disable_with => "${11:Please wait...}"}`!p textmate_var('TM_RAILS_TEMPLATE_END_RUBY_EXPR', snip)`
 endsnippet
 
@@ -255,11 +255,11 @@ snippet at "arrow bucket" i
 <${1}>
 endsnippet
 # 单引号 single quote，设定为 se 而非 sq，避免与 q 冲突
-snippet se "single quote" I
+snippet se "single quote" i
 '${1}'
 endsnippet
 # 双引号 quote
-snippet q "quote" I
+snippet q "quote" i
 "${1}"
 endsnippet
 # 指向符号
@@ -277,4 +277,15 @@ snippet vs "# string interpolation" i
 endsnippet
 snippet vp "# variable_name" i
 %{${1}}
+endsnippet
+snippet ld "html block" i
+<${1}>${2:TODO}</$1>
+endsnippet
+snippet bd "html block" i
+<${1}>
+	${2:TODO}
+</$1>
+endsnippet
+snippet an "||" i
+|${1}|
 endsnippet
