@@ -288,3 +288,5 @@ set completeopt-=preview
 " use ag for ack in vim
 let g:ackprg = 'ag --nogroup --nocolor -i'
 map <Leader>a :Ack <cword><CR>
+map <Leader>s :!ag -C 3 --ruby --js --sass <cword><CR>
+map <Leader>ra <C-W><C-W>q
