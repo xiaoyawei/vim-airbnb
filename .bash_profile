@@ -64,9 +64,9 @@ fi
 g(){
   if [ -z $2 ]
   then
-    ag -C 3 -i --ruby --js --sass $1
+    ag -C 3 -i --ruby --js --sass --color-match "1;31" --color-line-number "39" $1
   else
-    ag -C 3 -i --$2 $1
+    ag -C 3 -i --color-match "1;31" --color-line-number "39" $2 $1
   fi
 }
 alias sh1='ssh gw1.silver.musta.ch'
