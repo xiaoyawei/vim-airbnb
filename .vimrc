@@ -6,13 +6,6 @@ set shiftwidth=2
 set expandtab
 au BufWinEnter,BufNewFile * silent tab
 
-highlight ExtraWhitespace ctermbg=red guibg=red
-match ExtraWhitespace /\s\+$/
-autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
-autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-autocmd InsertLeave * match ExtraWhitespace /\s\+$/
-autocmd BufWinLeave * call clearmatches()
-
 setlocal textwidth=100
 set colorcolumn=101
 au BufEnter <buffer> set colorcolumn=101
@@ -52,6 +45,11 @@ set laststatus=2
 set foldmethod=indent
 " auto start code folding
 set nofoldenable
+
+" for .hql files
+au BufNewFile,BufRead *.hql set filetype=hive expandtab
+" for .q files
+au BufNewFile,BufRead *.q set filetype=hive expandtab
 
 " block from linux custom begins
 " do not display nonreadable chars
@@ -133,7 +131,7 @@ execute pathogen#infect()
 
 " skip parenthesiss
 func SkipPair()
-    if getline('.')[col('.') - 1] == ')' || getline('.')[col('.') - 1] == ']' || getline('.')[col('.') - 1] == '"' || getline('.')[col('.') - 1] == "'" || getline('.')[col('.') - 1] == '}' || getline('.')[col('.') - 1] == '>'
+    if getline('.')[col('.') - 1] == ')' || getline('.')[col('.') - 1] == ']' || getline('.')[col('.') - 1] == '"' || getline('.')[col('.') - 1] == "'" || getline('.')[col('.') - 1] == '}' || getline('.')[col('.') - 1] == '>' || getline('.')[col('.') - 1] == '|'
         return "\<ESC>la"
     else
         return "\t"
@@ -287,6 +285,30 @@ set completeopt-=preview
 
 " use ag for ack in vim
 let g:ackprg = 'ag --nogroup --nocolor -i'
-map <Leader>a :Ack <cword><CR>
+map <Leader>d :Ack <cword><CR>
 map <Leader>s :!ag -C 3 --ruby --js --sass --color-match "1;31" --color-line-number "39" <cword><CR>
 map <Leader>ra <C-W><C-W>q
+
+" Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
+if executable('ag')
+  " Use Ag over Grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
+
+let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist|\.vagrant|log|logs|tmp|CVS|coverage|vendor)|(\.(swp|ico|git|svn))$'
+
+let g:ycm_server_keep_logfiles = 1
+let g:ycm_server_log_level = 'debug'
+let g:ycm_warning_symbol = '.'
+let g:ycm_error_symbol = '..'
+let g:ycm_server_use_vim_stdout = 1
+
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()
