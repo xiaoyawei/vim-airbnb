@@ -22,18 +22,19 @@ alias l='ls -CF --color'
 
 alias gpr='git pull --rebase'
 alias gcm='git checkout master'
+alias gcp='git checkout production'
 alias gc='git checkout'
 alias gb='git branch'
 alias gd='git diff'
 alias gds='git diff --staged'
 alias grm='git rebase master'
+alias grp='git rebase production'
 alias gp='git push'
 alias gpf='git push -f'
 alias gs='git status'
 alias gsh='git show'
 alias ga='git add .'
 alias gca='git commit --amend --no-edit'
-alias grm='git rebase master'
 alias grc='git rebase --continue'
 alias gclean='git branch --merged master | grep -v "\* master" | xargs -n 1 git branch -d'
 alias gt='touch GIT_CHECKOUT_PATHS'
@@ -104,5 +105,17 @@ alias mame='cd /Users/xiaoya_wei/mame && ./mame64 -cheat'
 alias gradlew='/Users/xiaoya_wei/repos/treehouse/gradlew'
 
 s(){
-  ssh $1.inst.aws.us-east-1.prod.musta.ch
+  ssh $1.inst.aws.airbnb.com
 }
+
+push(){
+  scp /Users/xiaoya_wei/repos/treehouse/projects/trips/$1/build/libs/$1-all.jar xiaoya_wei@$2.inst.aws.airbnb.com:./matcha.jar
+}
+
+# afdev
+export DATA_DIR=$HOME/repos/data #PATH WHERE YOU CLONED THE DATA REPO
+export AFDEV_HOST="i-04da4384d0ddc523c.inst.aws.airbnb.com" #CHOOSE A DIFFERENT HOST
+export AFDEV_PORT=63185 #CHOOSE A DIFFERENT PORT
+
+alias estest='ssh -L 9200:localhost:9200 -L 9300:localhost:9300 $(optica role=wharf-elasticsearch-test-master$ | head -1)'
+alias esprod='ssh -L 9200:localhost:9200 -L 9300:localhost:9300 $(optica role=wharf-elasticsearch-i3-master$ | head -1)'
