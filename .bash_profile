@@ -1,5 +1,6 @@
 #export SSH_AUTH_SOCK=$TMPDIR/ssh-agent-$USER.sock
 export PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
 
 alias ap="cd /Users/xiaoya_wei/airlab && airlab provision"
 alias v="/Applications/MacVim.app/Contents/MacOS/Vim"
@@ -16,7 +17,7 @@ alias grep='grep -i --color=auto'
 alias egrep='egrep -i --color=auto'
 alias fgrep='fgrep -i --color=auto'
 
-alias ll='ls -alF --color'
+alias ll='ls -alFG'
 alias la='ls -A --color'
 alias l='ls -CF --color'
 
@@ -50,8 +51,7 @@ alias headlamp='ssh -v -N -L 9200:localhost:9200  i-36d0df85.inst.aws.airbnb.com
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo erro    r)"
-"$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo erro    r)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -112,9 +112,13 @@ push(){
   scp /Users/xiaoya_wei/repos/treehouse/projects/trips/$1/build/libs/$1-all.jar xiaoya_wei@$2.inst.aws.airbnb.com:./matcha.jar
 }
 
+tunnel(){
+  ssh -L $2:localhost:$2 $(optica role=$1 | head -1)
+}
+
 # afdev
 export DATA_DIR=$HOME/repos/data #PATH WHERE YOU CLONED THE DATA REPO
-export AFDEV_HOST="i-04da4384d0ddc523c.inst.aws.airbnb.com" #CHOOSE A DIFFERENT HOST
+export AFDEV_HOST="i-0a55744d91bc4533a.inst.aws.airbnb.com" #CHOOSE A DIFFERENT HOST
 export AFDEV_PORT=63185 #CHOOSE A DIFFERENT PORT
 
 alias estest='ssh -L 9200:localhost:9200 -L 9300:localhost:9300 $(optica role=wharf-elasticsearch-test-master$ | head -1)'
